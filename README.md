@@ -1,4 +1,4 @@
-```markdown
+
 # groq-coding-agent
 
 A Python coding agent powered by Groq's LLaMA 3.3 model, designed to automate coding tasks with an agentic loop and four core tools: read files, write files, execute Python code, and list directories. Ideal for developers looking to streamline repetitive coding tasks.
