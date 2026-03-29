@@ -1,69 +1,55 @@
+# groq-coding-agent 
 
-# groq-coding-agent
+A Python coding agent powered by Groq (LLaMA 3.3-70b) that autonomously solves coding tasks using an agentic loop and 4 built-in tools.
 
-A Python coding agent powered by Groq's LLaMA 3.3 model, designed to automate coding tasks with an agentic loop and four core tools: read files, write files, execute Python code, and list directories. Ideal for developers looking to streamline repetitive coding tasks.
+Built as a Groq-native alternative to the Gemini-based FreeCodeCamp agentic AI course.
 
-## Features
+## What it does
 
-- **Agentic Loop**: Iteratively processes tasks until completion.
-- **File Operations**: Reads and writes files programmatically.
-- **Python Execution**: Runs Python code within the agent.
-- **Directory Listing**: Navigates and lists directory contents.
-- **Groq Integration**: Leverages LLaMA 3.3 for advanced reasoning and code generation.
+Give it a task in plain English and it will autonomously:
+- Explore the project directory
+- Read relevant files
+- Write or edit code
+- Run Python files to verify results
+- Loop until the task is complete
 
-## Tech Stack
+## Tools
 
-- **Language**: Python
-- **Model**: Groq (LLaMA 3.3)
-- **Dependencies**: `groq`, `os`, `subprocess`
-
-## Installation
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/aliii-codes/groq-coding-agent.git
-   cd groq-coding-agent
-   ```
-
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Set up Groq API access:
-   - Obtain an API key from [Groq](https://groq.com).
-   - Set the `GROQ_API_KEY` environment variable:
-     ```bash
-     export GROQ_API_KEY="your_api_key_here"
-     ```
+| Tool | Description |
+|------|-------------|
+| `get_files_info` | List files and directories with sizes |
+| `get_file_content` | Read the contents of any file |
+| `write_file` | Create or overwrite files |
+| `run_python_file` | Execute Python files and capture output |
 
 ## Usage
+```bash
+# Basic usage
+uv run main.py "fix the bug in calc.py"
 
-1. Run the agent:
-   ```bash
-   python main.py
-   ```
-
-2. Interact with the agent by providing tasks or prompts. Example:
-   ```
-   Write a Python function to calculate the factorial of a number and save it to a file named `factorial.py`.
-   ```
-
-## Project Structure
-
+# With verbose output
+uv run main.py "what files are in the root dir?" --verbose
 ```
-groq-coding-agent/
-├── config.py          # Configuration constants
-├── functions/         # Tool functions (read, write, execute, list)
-│   ├── get_file_content.py
-│   ├── write_file.py
-│   ├── run_python.py
-│   └── list_directory.py
-├── main.py            # Entry point for the agent
-└── requirements.txt   # Project dependencies
+
+## Setup
+```bash
+git clone https://github.com/aliii-codes/groq-coding-agent
+cd groq-coding-agent
+uv venv && .venv\Scripts\activate
+uv add groq python-dotenv
 ```
+
+Create a `.env` file:
+```
+GROQ_API_KEY=your_key_here
+```
+
+## Stack
+
+- **LLM**: LLaMA 3.3-70b via Groq
+- **Package manager**: uv
+- **Language**: Python 3.10+
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-```
+MIT
