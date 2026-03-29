@@ -1,0 +1,43 @@
+import os
+
+
+def get_file_info(working_directory : str, directory="."):
+    abs_working_dir = os.path.abspath(working_directory)
+
+    if directory is None:
+        abs_directory = abs_working_dir
+    else:
+        abs_directory = os.path.abspath(os.path.join(working_directory, directory))
+
+    if not abs_directory.startswith(abs_working_dir):
+        return f"Error : {directory} is not in the working directory"
+    
+    final_response = ""
+    contents = os.listdir(abs_directory)
+
+    for content in contents:
+        content_path = os.path.join(abs_directory, content)
+        is_dir = os.path.isdir(content_path)
+        size = os.path.getsize(content_path)
+        final_response += f"- {content}: file_size={size} bytes , is_dir={is_dir}\n"
+
+    return final_response
+
+
+schema_get_files_info = {
+    "type": "function",
+    "function": {
+        "name": "get_files_info",
+        "description": "Lists files and directories in the specified directory along with their sizes",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "directory": {
+                    "type": "string",
+                    "description": "The directory to list files from, relative to the working directory. Use '.' for root."
+                }
+            },
+            "required": []
+        }
+    }
+}
